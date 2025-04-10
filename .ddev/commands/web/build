@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Description: Compile assets
+## Usage: build
+## Example: ddev build
+
+npm list &> '/dev/null' || npm install &> '/dev/null'
+
+npm run build

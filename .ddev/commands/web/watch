@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Description: Recompile assets on file change
+## Usage: watch
+## Example: ddev watch
+
+npm list &> '/dev/null' || npm install &> '/dev/null'
+
+npm run watch

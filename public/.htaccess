@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} .(php|html|gif|jpe?g|png|webp|js|css|json|swf|ico|txt|pdf|xml|ttf|eot|svg|woff|woff2|map|less)$ [NC]
+RewriteRule ^ - [L]
+
+RewriteRule !index.php - [C]
+RewriteRule ^(.*)$ /index.php?action=$1 [QSA,L]
