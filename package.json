@@ -18,12 +18,16 @@
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
-        "watch": "encore dev --watch",
+        "watch": "encore production --watch",
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@codemirror/lang-javascript": "^6.2.3",
+        "@codemirror/state": "^6.5.2",
+        "@codemirror/view": "^6.36.5",
         "@fortawesome/fontawesome-free": "^6.7.2",
         "bootstrap": "^5.3.3",
+        "codemirror": "^6.0.1",
         "sass": "^1.84.0"
     }
 }

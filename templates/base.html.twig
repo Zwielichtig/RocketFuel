@@ -1,0 +1,17 @@
+{% extends "head.html.twig" %}
+
+{# {% block title %}RocketFuel{% endblock %} #}
+
+{% block body %}
+    {% if user is null %}
+        {% include 'partials/login.html.twig' %}
+    {% else %}
+        {% include 'partials/navigation.html.twig' %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'partials/footer.html.twig' %}
+    {% endif %}
+{% endblock %}
