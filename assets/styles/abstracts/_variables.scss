@@ -1,0 +1,37 @@
+// Colors - New Dark Theme
+$color-primary: #6C5CE7; // Vibrant purple
+$color-secondary: #00D2D3; // Bright teal
+$color-neutral-1: #1A1B26; // Deep navy blue (main background)
+$color-neutral-2: #24273A; // Lighter navy (secondary background)
+$color-accent-1: #FF6B6B; // Coral red
+$color-accent-2: #2DD4BF; // Mint
+
+$color-success: #2ECC71; // Green
+$color-error: #FF6B6B; // Red
+
+// Text colors
+$text-primary: #ECEFF4; // Nearly white
+$text-secondary: #A9B1D6; // Light lavender
+$text-muted: #565F89; // Muted blue-gray
+
+// Border & shadow
+$border-color: #323454; // Purple-tinted border
+$shadow-color: rgba(0, 0, 0, 0.4); // Deep shadow
+
+// Bootstrap overrides
+$primary: $color-primary;
+$secondary: $color-secondary;
+$success: $color-success;
+$info: $color-accent-2;
+$warning: $color-accent-1;
+$danger: $color-error;
+$light: $text-primary;
+$dark: $color-neutral-1;
+
+// Terminal-inspired colors
+$terminal-black: #1A1B26;
+$terminal-green: #9ECE6A;
+$terminal-yellow: #E0AF68;
+$terminal-blue: #7AA2F7;
+$terminal-magenta: #BB9AF7;
+$terminal-cyan: #7DCFFF;
