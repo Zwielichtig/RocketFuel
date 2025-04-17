@@ -1,11 +1,20 @@
 {
     "compilerOptions": {
-        "module": "esnext",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "sourceMap": true
+      "target": "ES6",                            // Needed for modern imports
+      "module": "ESNext",                         // Works well with Webpack and ES modules
+      "moduleResolution": "node",                 // THIS is critical for resolving @codemirror/*
+      "esModuleInterop": true,                    // Allows default imports from CommonJS
+      "allowSyntheticDefaultImports": true,       // Allows `import x from 'x'`
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "skipLibCheck": true,                       // Avoids issues with some node_modules
+      "baseUrl": ".",                             // Helps with resolving modules
+      "paths": {
+        "*": ["node_modules/*"]
+      }
     },
     "include": ["assets/**/*"],
-    "exclude": ["**/node_modules/*"]
-}
+    "exclude": ["node_modules"]
+  }
