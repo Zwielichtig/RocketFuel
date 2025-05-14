@@ -1,22 +1,27 @@
-// Colors - New Dark Theme
-$color-primary: #6C5CE7; // Vibrant purple
-$color-secondary: #00D2D3; // Bright teal
-$color-neutral-1: #1A1B26; // Deep navy blue (main background)
-$color-neutral-2: #24273A; // Lighter navy (secondary background)
-$color-accent-1: #FF6B6B; // Coral red
-$color-accent-2: #2DD4BF; // Mint
+// Colors - Dark Theme
+$color-primary: #4CAF50;
+$color-secondary: #81C784;
+$color-neutral-1: #2c2c3a;
+$color-neutral-2: #3c3c4f;
+$color-accent-1: #A5D6A7;
+$color-accent-2: #66BB6A;
 
-$color-success: #2ECC71; // Green
-$color-error: #FF6B6B; // Red
+$color-success: #00E676;
+$color-warning: #FFC107;
+$color-error: #EF5350;
 
 // Text colors
-$text-primary: #ECEFF4; // Nearly white
-$text-secondary: #A9B1D6; // Light lavender
-$text-muted: #565F89; // Muted blue-gray
+$text-primary: #FFFFFF;
+$text-secondary: #A0AEC0;
+$text-muted: #718096;
 
 // Border & shadow
-$border-color: #323454; // Purple-tinted border
-$shadow-color: rgba(0, 0, 0, 0.4); // Deep shadow
+$border-color: #222836;
+$shadow-color: rgba(0, 0, 0, 0.4);
+
+// Gradient overlays
+$gradient-primary: linear-gradient(135deg, $color-primary, darken($color-primary, 15%));
+$gradient-accent: linear-gradient(135deg, $color-accent-1, $color-accent-2);
 
 // Bootstrap overrides
 $primary: $color-primary;
@@ -29,9 +34,9 @@ $light: $text-primary;
 $dark: $color-neutral-1;
 
 // Terminal-inspired colors
-$terminal-black: #1A1B26;
-$terminal-green: #9ECE6A;
-$terminal-yellow: #E0AF68;
-$terminal-blue: #7AA2F7;
-$terminal-magenta: #BB9AF7;
-$terminal-cyan: #7DCFFF;
+$terminal-black: #0A0C12;
+$terminal-green: #4ADE80;
+$terminal-yellow: #FBBF24;
+$terminal-blue: #60A5FA;
+$terminal-magenta: #E879F9;
+$terminal-cyan: #22D3EE;

@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\OS;
+use App\Entity\PackageManager;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<OS>
+ * @extends ServiceEntityRepository<PackageManager>
  */
-class OSRepository extends ServiceEntityRepository
+class PackageManagerRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, OS::class);
+        parent::__construct($registry, PackageManager::class);
     }
 
     //    /**
-    //     * @return OS[] Returns an array of OS objects
+    //     * @return PackageManager[] Returns an array of PackageManager objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('o.id', 'ASC')
+    //            ->orderBy('p.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?OS
+    //    public function findOneBySomeField($value): ?PackageManager
     //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()

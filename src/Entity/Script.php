@@ -20,35 +20,31 @@ class Script
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
+
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    /**
-     * @var Collection<int, Os>
-     */
-    #[ORM\ManyToMany(targetEntity: Os::class, inversedBy: 'scripts')]
-    private Collection $OS;
+    #[ORM\ManyToOne(inversedBy: 'scripts')]
+    private ?PackageManager $package_manager = null;
 
     /**
      * @var Collection<int, Logic>
      */
-    #[ORM\ManyToMany(targetEntity: Logic::class, inversedBy: 'scripts')]
+    #[ORM\ManyToMany(targetEntity: Logic::class)]
     private Collection $logic_parts;
 
     #[ORM\Column]
     private ?bool $published = null;
 
-    #[ORM\ManyToOne(inversedBy: 'scripts')]
+    #[ORM\ManyToOne(inversedBy: 'stop')]
     private ?User $creator = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $crdate = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
-
     public function __construct()
     {
-        $this->OS = new ArrayCollection();
         $this->logic_parts = new ArrayCollection();
     }
 
@@ -69,6 +65,18 @@ class Script
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function getContent(): ?string
     {
         return $this->content;
@@ -81,26 +89,14 @@ class Script
         return $this;
     }
 
-    /**
-     * @return Collection<int, Os>
-     */
-    public function getOS(): Collection
+    public function getPackageManager(): ?PackageManager
     {
-        return $this->OS;
+        return $this->package_manager;
     }
 
-    public function addO(Os $o): static
+    public function setPackageManager(?PackageManager $package_manager): static
     {
-        if (!$this->OS->contains($o)) {
-            $this->OS->add($o);
-        }
-
-        return $this;
-    }
-
-    public function removeO(Os $o): static
-    {
-        $this->OS->removeElement($o);
+        $this->package_manager = $package_manager;
 
         return $this;
     }
@@ -161,18 +157,6 @@ class Script
     public function setCrdate(\DateTimeImmutable $crdate): static
     {
         $this->crdate = $crdate;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }

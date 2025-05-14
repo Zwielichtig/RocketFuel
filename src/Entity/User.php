@@ -48,6 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Script::class, mappedBy: 'creator')]
     private Collection $scripts;
 
+    #[ORM\Column]
+    private ?bool $verified = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?AuthToken $AuthToken = null;
+
     public function __construct()
     {
         $this->logics = new ArrayCollection();
@@ -197,6 +203,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $script->setCreator(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerified(): ?bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): static
+    {
+        $this->verified = $verified;
+
+        return $this;
+    }
+
+    public function getAuthToken(): ?AuthToken
+    {
+        return $this->AuthToken;
+    }
+
+    public function setAuthToken(?AuthToken $AuthToken): static
+    {
+        $this->AuthToken = $AuthToken;
 
         return $this;
     }

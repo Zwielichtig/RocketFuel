@@ -20,47 +20,36 @@ class Logic
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
+
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(inversedBy: 'logics')]
+    #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?LogicType $type = null;
 
-    /**
-     * @var Collection<int, OS>
-     */
-    #[ORM\ManyToMany(targetEntity: OS::class, inversedBy: 'logics')]
-    private Collection $OS;
+    #[ORM\ManyToOne]
+    private ?PackageManager $package_manager = null;
 
     /**
      * @var Collection<int, self>
      */
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'dependencies')]
+    #[ORM\ManyToMany(targetEntity: self::class)]
     private Collection $dependencies;
 
     #[ORM\Column]
     private ?bool $published = null;
 
-    #[ORM\ManyToOne(inversedBy: 'logics')]
+    #[ORM\ManyToOne]
     private ?User $creator = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $crdate = null;
 
-    /**
-     * @var Collection<int, Script>
-     */
-    #[ORM\ManyToMany(targetEntity: Script::class, mappedBy: 'logic_parts')]
-    private Collection $scripts;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
-
     public function __construct()
     {
-        $this->OS = new ArrayCollection();
         $this->dependencies = new ArrayCollection();
-        $this->scripts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +65,18 @@ class Logic
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -104,26 +105,14 @@ class Logic
         return $this;
     }
 
-    /**
-     * @return Collection<int, OS>
-     */
-    public function getOS(): Collection
+    public function getPackageManager(): ?PackageManager
     {
-        return $this->OS;
+        return $this->package_manager;
     }
 
-    public function addO(OS $o): static
+    public function setPackageManager(?PackageManager $package_manager): static
     {
-        if (!$this->OS->contains($o)) {
-            $this->OS->add($o);
-        }
-
-        return $this;
-    }
-
-    public function removeO(OS $o): static
-    {
-        $this->OS->removeElement($o);
+        $this->package_manager = $package_manager;
 
         return $this;
     }
@@ -184,45 +173,6 @@ class Logic
     public function setCrdate(\DateTimeImmutable $crdate): static
     {
         $this->crdate = $crdate;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Script>
-     */
-    public function getScripts(): Collection
-    {
-        return $this->scripts;
-    }
-
-    public function addScript(Script $script): static
-    {
-        if (!$this->scripts->contains($script)) {
-            $this->scripts->add($script);
-            $script->addLogicPart($this);
-        }
-
-        return $this;
-    }
-
-    public function removeScript(Script $script): static
-    {
-        if ($this->scripts->removeElement($script)) {
-            $script->removeLogicPart($this);
-        }
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }

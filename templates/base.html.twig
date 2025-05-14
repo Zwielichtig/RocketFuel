@@ -5,6 +5,10 @@
 {% block body %}
     {% if user is null %}
         {% include 'partials/login.html.twig' %}
+    {% elseif false == user.isVerified %}
+        <p>Bitte verifizieren Sie Ihre Email.</p>
+
+        <button type="submit">Mail erneut senden</button>
     {% else %}
         {% include 'partials/navigation.html.twig' %}
 

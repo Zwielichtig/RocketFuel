@@ -1,0 +1,13 @@
+Please Confirm your Email
+
+    <p>Hello {{ user.firstName|default('there') }},</p>
+
+    <p>Thank you for registering! Please confirm your email address by clicking the link below:</p>
+
+    <p><a href="{{ signedUrl }}">Confirm my Email</a></p>
+
+    <p>This link will expire in {{ expirationTime }}.</p>
+
+    <p>If you did not create an account, please ignore this email.</p>
+
+    <p>— The {{ appName|default('RocketFuel') }} Team</p>

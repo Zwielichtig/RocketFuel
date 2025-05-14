@@ -1,4 +1,4 @@
-<nav class="main-nav">
+<nav class="main-nav ts-module-Navigation">
   <div class="nav-container">
     <div class="nav-left">
       <a href="/" class="nav-logo">
@@ -8,9 +8,17 @@
     </div>
 
     <div class="nav-right">
-      <button class="nav-user-btn">
-        <i class="fas fa-user"></i>
-      </button>
+      <div class="nav-user-dropdown">
+        <button class="nav-user-btn">
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="nav-dropdown-menu hidden">
+          <a href="/logout" class="nav-dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+          </a>
+        </div>
+      </div>
       <button class="nav-menu-btn">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>

@@ -1,6 +1,8 @@
 import { EditorView } from '@codemirror/view';
 import { javascript } from '@codemirror/lang-javascript';
 import { basicSetup } from 'codemirror';
+import { autocompletion } from "@codemirror/autocomplete";
+import { dracula } from 'thememirror';
 
 export class ScriptEditorHandler {
     private static instance: ScriptEditorHandler;
@@ -18,7 +20,7 @@ export class ScriptEditorHandler {
     }
 
     private addCodeEditor(): void {
-        const editorElement = document.querySelector('.editor-container');
+        const editorElement = document.querySelector('.codemirror-editor-container');
 
         if (!editorElement) {
             console.warn('[ScriptEditorHandler] Editor container not found.');
@@ -27,7 +29,7 @@ export class ScriptEditorHandler {
 
         this.editor = new EditorView({
             doc: '#!/bin/bash',
-            extensions: [basicSetup, javascript()],
+            extensions: [basicSetup, javascript(), autocompletion(), dracula],
             parent: editorElement,
         });
     }

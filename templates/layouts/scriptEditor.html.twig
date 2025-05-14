@@ -3,7 +3,50 @@
 {% block title %}RocketFuel - Editor{% endblock %}
 
 {% block content %}
-    <div class="ts-module-ScriptEditor">
-        <div class="editor-container" style="height: 300px; border: 1px solid #ccc;"></div>
+    <div class="editor">
+        <form action="" method="post" class="editor-form">
+            <div class="editor-meta-container">
+                <input type="text" name="title" class="editor-input-title" placeholder="Titel" required>
+                <input type="text" name="description" class="editor-input-description" placeholder="Beschreibung" required>
+                <select name="packageManager" class="editor-input-packageManager" required>
+                    <option value="packageManager">packageManager</option>
+                </select>
+            </div>
+
+            <div class="editor-content-container">
+                <div style="background: grey" class="editor-menu-container">menu</div>
+                <div class="ts-module-ScriptEditor">
+                    <div class="codemirror-editor-container" style="height: 300px; border: 1px solid #ccc;"></div>
+                    <div class="editor-buttons">
+                        <button type="submit" class="btn btn-submit">Speichern</button>
+                        <button class="btn btn-cancel">Abbrechen</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+{# <!-- Primary Button -->
+<button class="btn btn-primary">Get Started</button>
+
+<!-- Secondary Button -->
+<a href="#" class="btn btn-secondary">Learn More</a>
+
+<!-- Submit Button -->
+<button type="submit" class="btn btn-submit">Save Changes</button>
+
+<!-- Cancel Button -->
+<button class="btn btn-cancel">Cancel</button>
+
+<!-- With Icon -->
+<button class="btn btn-primary"><i class="fas fa-rocket"></i>Launch</button>
+
+<!-- Size Variants -->
+<button class="btn btn-primary btn-sm">Small</button>
+<button class="btn btn-primary btn-lg">Large</button>
+
+<!-- Full Width -->
+<button class="btn btn-primary btn-block">Full Width</button>
+
+<!-- Icon Only -->
+<button class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></button> #}
 {% endblock %}

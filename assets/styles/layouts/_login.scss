@@ -1,0 +1,86 @@
+@use "../abstracts" as *;
+
+.auth-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.auth-card {
+    background-color: $color-neutral-2;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px $shadow-color;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    color: $text-secondary;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+
+    &.active {
+        color: $text-primary;
+        border-bottom-color: $color-primary;
+    }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    color: $text-primary;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: $color-neutral-1;
+    color: $text-primary;
+
+    &:focus {
+        outline: none;
+        border-color: $color-primary;
+    }
+}
+
+button[type="submit"] {
+    padding: 10px;
+    background-color: $color-primary;
+    color: $text-primary;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken($color-primary, 5%);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
