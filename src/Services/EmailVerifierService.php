@@ -26,7 +26,7 @@ class EmailVerifierService
 
     public function sendEmailConfirmation(string $verifyEmailRouteName, User $user, TemplatedEmail $email): void
     {
-        $expirationTime = '1 hour';
+        $expirationTime = '1 Stunde';
 
         $signature = $this->generateSignature(
             $user,

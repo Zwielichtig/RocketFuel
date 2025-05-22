@@ -1,7 +1,101 @@
 {% extends "base.html.twig" %}
 
-{% block title %}RocketFuel{% endblock %}
+{% block title %}RocketFuel - Home{% endblock %}
 
 {% block content %}
-    <div>content</div>
+<div class="home">
+    <section class="home-hero">
+        <div class="hero-content">
+            <h1>Willkommen bei RocketFuel</h1>
+            <p class="hero-subtitle">Deine Plattform für effiziente Skripte und Logiken</p>
+            {% if not user %}
+                <div class="hero-actions">
+                    <a href="{{ path('landing') }}" class="button button-primary">Mehr erfahren</a>
+                    <a href="{{ path('login') }}" class="button button-secondary">Anmelden</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="home-content">
+        <section class="home-section">
+            <div class="section-header">
+                <h2>Neueste Skripte</h2>
+                {% if user %}
+                    <a href="{{ path('editor', {'type': 'script', 'id': 0}) }}" class="button-create">Neues Skript erstellen</a>
+                {% endif %}
+            </div>
+
+            {% if latestScripts|length > 0 %}
+                <div class="card-grid">
+                    {% for script in latestScripts %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ script.name }}</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="card-description">{{ script.description }}</p>
+                                <div class="card-meta">
+                                    <span class="card-category">{{ script.category.name }}</span>
+                                    <span class="card-creator">von {{ script.creator.username }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('preview', {'type': 'script', 'id': script.id}) }}" class="button button-small button-preview">Vorschau</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>Noch keine öffentlichen Skripte verfügbar.</p>
+                    {% if user %}
+                        <a href="{{ path('editor', {'type': 'script', 'id': 0}) }}" class="button-create">Erstes Skript erstellen</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="home-section">
+            <div class="section-header">
+                <h2>Neueste Logiken</h2>
+                {% if user %}
+                    <a href="{{ path('editor', {'type': 'logic', 'id': 0}) }}" class="button-create">Neue Logik erstellen</a>
+                {% endif %}
+            </div>
+
+            {% if latestLogics|length > 0 %}
+                <div class="card-grid">
+                    {% for logic in latestLogics %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ logic.name }}</h3>
+                                {% if logic.packageManager %}
+                                    <span class="card-badge card-badge-pm">{{ logic.packageManager.name }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="card-content">
+                                <p class="card-description">{{ logic.description }}</p>
+                                <div class="card-meta">
+                                    <span class="card-category">{{ logic.category.name }}</span>
+                                    <span class="card-creator">von {{ logic.creator.username }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ path('preview', {'type': 'logic', 'id': logic.id}) }}" class="button button-small button-preview">Vorschau</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <p>Noch keine öffentlichen Logiken verfügbar.</p>
+                    {% if user %}
+                        <a href="{{ path('editor', {'type': 'logic', 'id': 0}) }}" class="button-create">Erste Logik erstellen</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
 {% endblock %}

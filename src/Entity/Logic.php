@@ -17,17 +17,13 @@ class Logic
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?LogicType $type = null;
 
     #[ORM\ManyToOne]
     private ?PackageManager $package_manager = null;
@@ -47,6 +43,13 @@ class Logic
     #[ORM\Column]
     private ?\DateTimeImmutable $crdate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'logics')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $modified = null;
+
     public function __construct()
     {
         $this->dependencies = new ArrayCollection();
@@ -57,14 +60,14 @@ class Logic
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getname(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setname(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
@@ -89,18 +92,6 @@ class Logic
     public function setContent(string $content): static
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getType(): ?LogicType
-    {
-        return $this->type;
-    }
-
-    public function setType(?LogicType $type): static
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -173,6 +164,30 @@ class Logic
     public function setCrdate(\DateTimeImmutable $crdate): static
     {
         $this->crdate = $crdate;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getModified(): ?\DateTime
+    {
+        return $this->modified;
+    }
+
+    public function setModified(?\DateTime $modified): static
+    {
+        $this->modified = $modified;
 
         return $this;
     }

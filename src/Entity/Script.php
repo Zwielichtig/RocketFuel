@@ -17,13 +17,10 @@ class Script
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'scripts')]
     private ?PackageManager $package_manager = null;
@@ -32,7 +29,7 @@ class Script
      * @var Collection<int, Logic>
      */
     #[ORM\ManyToMany(targetEntity: Logic::class)]
-    private Collection $logic_parts;
+    private Collection $dependencies;
 
     #[ORM\Column]
     private ?bool $published = null;
@@ -43,9 +40,19 @@ class Script
     #[ORM\Column]
     private ?\DateTimeImmutable $crdate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'scripts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $modified = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $path = null;
+
     public function __construct()
     {
-        $this->logic_parts = new ArrayCollection();
+        $this->dependencies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,14 +60,14 @@ class Script
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getname(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setname(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
@@ -73,18 +80,6 @@ class Script
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): static
-    {
-        $this->content = $content;
 
         return $this;
     }
@@ -104,15 +99,15 @@ class Script
     /**
      * @return Collection<int, Logic>
      */
-    public function getLogicParts(): Collection
+    public function getDependencies(): Collection
     {
-        return $this->logic_parts;
+        return $this->dependencies;
     }
 
-    public function addLogicPart(Logic $logicPart): static
+    public function addDependencies(Logic $dependency): static
     {
-        if (!$this->logic_parts->contains($logicPart)) {
-            $this->logic_parts->add($logicPart);
+        if (!$this->dependencies->contains($dependency)) {
+            $this->dependencies->add($dependency);
         }
 
         return $this;
@@ -120,7 +115,7 @@ class Script
 
     public function removeLogicPart(Logic $logicPart): static
     {
-        $this->logic_parts->removeElement($logicPart);
+        $this->dependencies->removeElement($logicPart);
 
         return $this;
     }
@@ -157,6 +152,42 @@ class Script
     public function setCrdate(\DateTimeImmutable $crdate): static
     {
         $this->crdate = $crdate;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getModified(): ?\DateTime
+    {
+        return $this->modified;
+    }
+
+    public function setModified(?\DateTime $modified): static
+    {
+        $this->modified = $modified;
+
+        return $this;
+    }
+
+    public function getPath(): ?string
+    {
+        return $this->path;
+    }
+
+    public function setPath(?string $path): static
+    {
+        $this->path = $path;
 
         return $this;
     }

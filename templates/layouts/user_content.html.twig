@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="user-content">
+    <div class="user-content-header">
+        <h1>{{ title }}</h1>
+        <div class="user-content-actions">
+            <a href="{{ path('editor', {'type': type, 'id': 'new'}) }}" class="button-create">
+                <i class="fas fa-plus"></i>
+                Neu erstellen
+            </a>
+        </div>
+    </div>
+
+    {% if items|length > 0 %}
+        <div class="user-content-list">
+            {% for item in items %}
+                <div class="user-content-item">
+                    <div class="user-content-item-info">
+                        <h3 class="user-content-item-name">{{ item.name }}</h3>
+                        <div class="user-content-item-meta">
+                            <span class="user-content-item-category">{{ item.category.name }}</span>
+                            {% if type == 'script' and item.packageManager %}
+                                <span class="user-content-item-pm">{{ item.packageManager.name }}</span>
+                            {% endif %}
+                            <span class="user-content-item-date">
+                                <i class="far fa-clock"></i>
+                                {{ item.crdate|date('d.m.Y H:i') }}
+                            </span>
+                        </div>
+                        {% if item.description %}
+                            <p class="user-content-item-description">{{ item.description }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="user-content-item-actions">
+                        <a href="{{ path('preview', {'type': type, 'id': item.id}) }}" class="button button-small button-preview">
+                            <i class="fas fa-eye"></i>
+                            Vorschau
+                        </a>
+                        <a href="{{ path('editor', {'type': type, 'id': item.id}) }}" class="button button-small button-primary">
+                            <i class="fas fa-edit"></i>
+                            Bearbeiten
+                        </a>
+                        <button type="button" class="button button-small button-danger" data-delete-url="{{ path('delete_content', {'type': type, 'id': item.id}) }}" data-item-name="{{ item.name }}">
+                            <i class="fas fa-trash"></i>
+                            Löschen
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="user-content-empty">
+            <i class="fas fa-folder-open"></i>
+            <p>Du hast noch keine {{ type == 'script' ? 'Skripte' : 'Logiken' }} erstellt.</p>
+            <a href="{{ path('editor', {'type': type, 'id': 'new'}) }}" class="button-create">
+                <i class="fas fa-plus"></i>
+                Erstelle dein erstes {{ type == 'script' ? 'Skript' : 'Logik' }}
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal" id="deleteModal" style="display: none;">
+    <div class="modal-content">
+        <h3>Löschen bestätigen</h3>
+        <p>Möchtest du <span class="delete-item-name"></span> wirklich löschen?</p>
+        <div class="modal-actions">
+            <button type="button" class="button button-secondary" data-modal-close>Abbrechen</button>
+            <button type="button" class="button button-danger" id="confirmDelete">Löschen</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

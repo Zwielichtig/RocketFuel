@@ -16,7 +16,7 @@ class PackageManager
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $name = null;
 
     /**
      * @var Collection<int, Script>
@@ -41,14 +41,14 @@ class PackageManager
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getname(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setname(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }

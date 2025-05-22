@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ preview.name }} - Vorschau{% endblock %}
+
+{% block content %}
+<div class="preview ts-module-Preview">
+    <div class="preview-header">
+        <div class="preview-header-content">
+            <h1>{{ preview.name }}</h1>
+            <div class="preview-meta">
+                <span class="preview-category">{{ preview.category }}</span>
+                {% if preview.packageManager %}
+                    <span class="preview-pm">{{ preview.packageManager }}</span>
+                {% endif %}
+                <span class="preview-creator">von {{ preview.creator }}</span>
+            </div>
+            <p class="preview-description">{{ preview.description }}</p>
+            {% if preview.type == 'script' %}
+                <div class="preview-command">
+                    <div class="preview-command-content">
+                        <code>wget {{ url('raw_content', {'type': preview.type, 'id': preview.id}) }} -O ~/{{ preview.name|lower|replace({' ': '-'}) }}.sh && sudo -i bash ~/{{ preview.name|lower|replace({' ': '-'}) }}.sh</code>
+                        <button class="preview-command-copy" title="Kommando kopieren">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="preview-command-copied">Kopiert!</div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="preview-actions">
+            {% if preview.type == 'script' %}
+                <a href="{{ path('raw_content', {'type': preview.type, 'id': preview.id}) }}" class="button button-secondary" target="_blank" title="Direkter Link zum Skript">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    Raw Content
+                </a>
+            {% endif %}
+            {% if user and user.id == preview.creator %}
+                <a href="{{ path('editor', {'type': preview.type, 'id': preview.id}) }}" class="button button-primary">Bearbeiten</a>
+            {% endif %}
+            <a href="{{ path('homepage') }}" class="button button-secondary">Zurück</a>
+        </div>
+    </div>
+
+    <div class="preview-content">
+        {% if preview.type == 'script' and preview.blocks|length > 0 %}
+            <div class="preview-blocks">
+                {% for block in preview.blocks %}
+                    <div class="preview-block">
+                        <div class="preview-block-header">
+                            <span class="preview-block-position">{{ block.position }}</span>
+                            <div class="preview-block-info">
+                                <span class="preview-block-name">{{ block.name }}</span>
+                                {% if block.description %}
+                                    <div class="preview-block-description">{{ block.description }}</div>
+                                {% endif %}
+                            </div>
+                            {% if block.packagemanager is not null %}
+                                <span class="preview-block-pm">{{ block.packagemanager }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="preview-block-content">
+                            <pre><code>{{ block.content }}</code></pre>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="preview-code">
+                <pre><code>{{ preview.content }}</code></pre>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

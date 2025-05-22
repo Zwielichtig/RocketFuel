@@ -13,17 +13,21 @@
           <i class="fas fa-user"></i>
         </button>
         <div class="nav-dropdown-menu hidden">
+          <a href="{{ path('user_scripts') }}" class="nav-dropdown-item">
+            <i class="fas fa-code"></i>
+            Meine Skripte
+          </a>
+          <a href="{{ path('user_logics') }}" class="nav-dropdown-item">
+            <i class="fas fa-project-diagram"></i>
+            Meine Logiken
+          </a>
+          <div class="nav-dropdown-divider"></div>
           <a href="/logout" class="nav-dropdown-item">
             <i class="fas fa-sign-out-alt"></i>
             Logout
           </a>
         </div>
       </div>
-      <button class="nav-menu-btn">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
     </div>
   </div>
 </nav>

@@ -1,4 +1,5 @@
 import '../styles/app.scss';
+import { UserContent } from './modules/UserContent';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const modulesToLoad = getTSModules();
@@ -22,6 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error(`Failed to load module "./modules/${handler}":`, err);
           });
       });
+    }
+
+    // Initialize UserContent module if we're on a user content page
+    if (document.querySelector('.user-content')) {
+        new UserContent();
     }
 });
 

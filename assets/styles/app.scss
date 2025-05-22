@@ -7,4 +7,8 @@
 @use '~@fortawesome/fontawesome-free/scss/brands';
 
 @use "layouts";
+@use "layouts/home";
+@use "layouts/editor";
+@use "layouts/preview";
+@use "layouts/user_content";
 @use "components";
