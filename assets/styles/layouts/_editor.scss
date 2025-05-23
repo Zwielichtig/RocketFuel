@@ -2,14 +2,15 @@
 
 // Main container
 .editor {
-    height: calc(100vh - 64px);  // Account for header
+    min-height: calc(100vh - 64px);
     padding: 20px;
-  box-sizing: border-box;
+    box-sizing: border-box;
     display: grid;
-    grid-template-rows: auto 1fr;  // Top container auto height, bottom container takes remaining space
+    grid-template-rows: auto 1fr;
     gap: 20px;
-    overflow-y: auto;  // Change from overflow: hidden to overflow-y: auto
-    position: relative;  // Add position relative
+    overflow: visible;
+    position: relative;
+    background-color: $color-neutral-1;
 }
 
 // Top Container (Meta)
@@ -21,18 +22,19 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    min-height: fit-content;  // Take only needed height
+    min-height: fit-content;
 }
 
 // Bottom Container (Editor)
 .editor-bottom-container {
     display: grid;
     gap: 20px;
-    min-height: 0;  // Important for grid child
-    overflow: visible;  // Change from overflow: hidden to overflow: visible
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;  // Changed to hidden to prevent double scrollbars
 
     // Default layout for scripts (split view)
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
 
     // Full width layout for logics
     &.editor-logic-mode {
@@ -46,19 +48,11 @@
     border-radius: 8px;
     box-shadow: 0 2px 10px $shadow-color;
     padding: 15px;
-    overflow: hidden;  // Contain scrolling content
     display: flex;
     flex-direction: column;
-    min-height: 0;  // Important for flex child
-
-    .editor-menu-content {
-  display: flex;
-  flex-direction: column;
-        gap: 15px;
-        overflow-y: auto;  // Enable vertical scrolling
-        flex: 1;  // Take remaining space
-        min-height: 0;  // Important for flex child
-    }
+    gap: 15px;
+    height: 100%;
+    overflow-y: auto;
 }
 
 // Search Container
@@ -148,13 +142,13 @@
     box-shadow: 0 2px 10px $shadow-color;
     display: flex;
     flex-direction: column;
-    min-height: 0;  // Important for grid child
-    overflow: visible;  // Change from overflow: hidden to overflow: visible
-    position: relative;  // Add position relative
+    height: 100%;
+    overflow: hidden;  // Changed to hidden to prevent double scrollbars
+    position: relative;
 
     // Full width mode for logics
     &.editor-content-full {
-        height: 100%;
+        grid-column: 1 / -1;
     }
 }
 
@@ -162,11 +156,11 @@
 .ts-module-Editor {
     height: 100%;
     padding: 20px;
-  display: flex;
-  flex-direction: column;
-    min-height: 0;  // Important for flex child
-    overflow: visible;  // Change from overflow: hidden to overflow: visible
-    position: relative;  // Add position relative
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    position: relative;
+    background-color: $color-neutral-2;
 }
 
 // CodeMirror Container
@@ -175,14 +169,15 @@
     border: 1px solid $border-color;
     border-radius: 4px;
     background-color: $color-neutral-1;
-    min-height: 0;  // Important for flex child
-    overflow: auto;  // Change from overflow: hidden to overflow: auto
     position: relative;
-    max-height: calc(100vh - 200px);  // Increased from 300px to 200px to make the editor taller
+    max-height: 600px;  // Set a fixed max-height
+    overflow-y: auto;  // Enable vertical scrolling
+    min-height: 0;
 
     .cm-editor {
         height: 100%;
         width: 100%;
+        background-color: $color-neutral-1;
     }
 
     .cm-scroller {
@@ -194,17 +189,34 @@
 .editor-input-group {
     display: flex;
     gap: 15px;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
 
-    input[type="text"] {
+    .editor-input-wrapper {
         flex: 1;
         min-width: 200px;
-    }
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
 
-    select {
-        min-width: 150px;
+        &.editor-checkbox-wrapper {
+            flex: 0 0 auto;
+            margin-top: 24px;
+        }
     }
+}
+
+// Input Label
+.editor-input-label {
+    color: $text-secondary;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+// Input Styling
+.editor-input-name,
+.editor-input-description {
+    width: 100%;
 }
 
 // Input Styling

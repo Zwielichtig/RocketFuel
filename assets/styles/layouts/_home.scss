@@ -236,11 +236,5 @@
             border-color: $color-primary;
             color: $color-primary;
         }
-
-        &::before {
-            content: '👁️';
-            margin-right: 6px;
-            font-size: 0.9em;
-        }
     }
 }

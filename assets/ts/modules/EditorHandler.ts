@@ -136,19 +136,19 @@ export class EditorHandler
 
             console.log('Sending save data:', saveData);
 
-            try {
-                const response = await ajaxHelper.request('/ajax/editor/save', {
-                    method: 'POST',
+                try {
+                    const response = await ajaxHelper.request('/ajax/editor/save', {
+                        method: 'POST',
                     body: saveData,
-                });
+                    });
 
                 console.log('Save response:', response);
 
-                if (response.redirect) {
-                    window.location.href = response.redirect;
-                }
-            } catch (error) {
-                console.error('Error saving script:', error);
+                    if (response.redirect) {
+                        window.location.href = response.redirect;
+                    }
+                } catch (error) {
+                    console.error('Error saving script:', error);
             }
         });
     }
@@ -160,10 +160,22 @@ export class EditorHandler
 
     public searchLogics(): void
     {
+        // Only initialize search functionality in script mode
+        if (!window.location.pathname.includes('/script/')) {
+            return;
+        }
+
         const searchInput = document.querySelector('.editor-search-input') as HTMLInputElement;
         const searchButton = document.querySelector('.editor-search-button') as HTMLButtonElement;
         const clearButton = document.querySelector('.editor-search-clear') as HTMLButtonElement;
         const resultsContainer = document.querySelector('.editor-search-results') as HTMLDivElement;
+
+        // If any of the required elements are missing, don't initialize search
+        if (!searchInput || !searchButton || !clearButton || !resultsContainer) {
+            console.warn('Search elements not found, skipping search initialization');
+            return;
+        }
+
         const ajaxHelper = new AjaxHelper();
 
         // Function to update clear button visibility

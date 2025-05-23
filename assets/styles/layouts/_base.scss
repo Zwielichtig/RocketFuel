@@ -1,0 +1,23 @@
+@use "../abstracts" as *;
+
+html {
+    height: 100%;
+    overflow-y: auto;  // Single scrollbar for the page
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;  // Prevent horizontal scrollbar
+}
+
+main {
+    flex: 1 0 auto;  // Allow main content to grow but not shrink
+    width: 100%;
+    position: relative;
+}
+
+// ... rest of existing code ...

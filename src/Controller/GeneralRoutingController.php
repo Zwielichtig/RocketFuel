@@ -48,4 +48,20 @@ class GeneralRoutingController extends BaseController
             'user' => $this->session->get('user'),
         ]);
     }
+
+    #[Route('/{route}', name: 'not_found', requirements: ['route' => '.*'], priority: -100)]
+    public function notFound(): Response
+    {
+        // Only handle GET requests
+        if ($this->requestObject->getMethod() !== 'GET') {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('/layouts/error.html.twig', [
+            'user' => $this->session->get('user'),
+            'error_code' => 404,
+            'error_message' => 'Die angeforderte Seite wurde nicht gefunden.',
+            'error_description' => 'Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben.'
+        ]);
+    }
 }

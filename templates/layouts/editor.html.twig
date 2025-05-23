@@ -8,25 +8,39 @@
             <!-- Top Container: Meta Inputs -->
             <div class="editor-top-container">
                 <div class="editor-input-group">
-                    <input type="text" name="name" class="editor-input-name" placeholder="Titel" required>
-                    <input type="text" name="description" class="editor-input-description" placeholder="Beschreibung" required>
+                    <div class="editor-input-wrapper">
+                        <label for="editor-name" class="editor-input-label">Titel</label>
+                        <input type="text" id="editor-name" name="name" class="editor-input-name" placeholder="Titel eingeben" required>
+                    </div>
+                    <div class="editor-input-wrapper">
+                        <label for="editor-description" class="editor-input-label">Beschreibung</label>
+                        <input type="text" id="editor-description" name="description" class="editor-input-description" placeholder="Beschreibung eingeben" required>
+                    </div>
                 </div>
                 <div class="editor-input-group">
-                    <select name="packageManager" class="editor-input-packageManager" required>
-                        <option value="null">Alle</option>
-                        {% for manager in packageManager %}
-                            <option value="{{ manager.id }}">{{ manager.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <select name="category" class="editor-input-category" required>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <label class="editor-checkbox-label">
-                        <input type="checkbox" name="isPublic" class="editor-input-isPublic">
-                        <span>Öffentlich</span>
-                    </label>
+                    <div class="editor-input-wrapper">
+                        <label for="editor-packageManager" class="editor-input-label">Paketmanager</label>
+                        <select id="editor-packageManager" name="packageManager" class="editor-input-packageManager" required>
+                            <option value="null">Alle</option>
+                            {% for manager in packageManager %}
+                                <option value="{{ manager.id }}">{{ manager.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="editor-input-wrapper">
+                        <label for="editor-category" class="editor-input-label">Kategorie</label>
+                        <select id="editor-category" name="category" class="editor-input-category" required>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="editor-input-wrapper editor-checkbox-wrapper">
+                        <label class="editor-checkbox-label">
+                            <input type="checkbox" name="isPublic" class="editor-input-isPublic">
+                            <span>Öffentlich</span>
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -35,37 +49,35 @@
                 {% if type == 'script' %}
                     <!-- Left Container: Menu (only for scripts) -->
                     <div class="editor-menu-container">
-                        <div class="editor-menu-content">
-                            <div class="editor-search-container">
-                                <div class="editor-search-input-wrapper">
-                                    <input type="text" class="editor-search-input" placeholder="Suchen...">
-                                    <button type="button" class="editor-search-clear" style="display: none;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <button class="editor-search-button">
+                        <div class="editor-search-container">
+                            <div class="editor-search-input-wrapper">
+                                <input type="text" class="editor-search-input" placeholder="Suchen...">
+                                <button type="button" class="editor-search-clear" style="display: none;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
                                     </svg>
                                 </button>
                             </div>
-                            <div class="editor-search-results" style="display: none;">
-                                <!-- Results will be populated via JavaScript -->
-                            </div>
-                            <button type="button" class="editor-add-custom-block">
+                            <button class="editor-search-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                                 </svg>
-                                Neuer Custom Block
                             </button>
-                            <div class="editor-logic-blocks">
-                                <!-- Logic blocks will be added here -->
-                            </div>
+                        </div>
+                        <div class="editor-search-results" style="display: none;">
+                            <!-- Results will be populated via JavaScript -->
+                        </div>
+                        <button type="button" class="editor-add-custom-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Neuer Custom Block
+                        </button>
+                        <div class="editor-logic-blocks">
+                            <!-- Logic blocks will be added here -->
                         </div>
                     </div>
                 {% endif %}

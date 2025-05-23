@@ -3,9 +3,3 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
-
-not_found:
-    path: /{any}
-    controller: App\Controller\FallbackController::handleNotFound
-    requirements:
-        any: '.+'
